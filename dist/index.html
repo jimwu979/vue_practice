@@ -821,82 +821,82 @@
     </script>    
 </head>
 <body data-windows_width="0">
-    <h1>市場氣象台</h1>
-    <div class="filter" id="filter">
-        <div>
-            <h3>選擇市場</h3>
-            <ul id="select_market" data-class="data-market">
-                <li data-market="bond mature rising industry" class="now">不限</li>
-                <li data-market="bond">債券型</li>
-                <li data-market="mature">成熟股</li>
-                <li data-market="rising">新興股</li>
-                <li data-market="industry">產業</li>
-                <li data-market="asd">asd</li>
-                <li data-market="asd">asd</li>
-                <li data-market="asd">asd</li>
-                <li data-market="asd">asd</li>
-                <li data-market="asd">asd</li>
-                <li data-market="asd">asd</li>
-                <li data-market="asd">asd</li>
-                <li data-market="asd">asd</li>
-                <li data-market="asd">asd</li>
-                <li data-market="asd">asd</li>
-                <li data-market="asd">asd</li>
-                <li data-market="asd">asd</li>
-            </ul>
-        </div>
-        <div>
-            <h3>選擇天氣</h3>
-            <ul id="select_weather" data-class="data-weather">
-                <li data-weather="optimism neutral pessimistic" class="now">不限</li>
-                <li data-weather="optimism">正向</li>
-                <li data-weather="neutral">中立</li>
-                <li data-weather="pessimistic">負向</li>
-            </ul>
-        </div>
-    </div>
-    <div class="fund">
-        <div class="titleBar">
-            <h2>基金市場</h2>
-            <div class="sort" id="sort">
-                <div data-sort="performance_month_3" class="nowSort" id="nowSort">3個月績效排序</div>
-                <ul id="">
-                    <li data-sort="performance_month_3">3個月績效排序</li>
-                    <li data-sort="performance_month_6">6個月績效排序</li>
-                    <li data-sort="performance_month_12">1年績效排序</li>
+    <div id="app">
+        <h1>市場氣象台</h1>
+        <div class="filter" id="filter">
+            <div>
+                <h3>選擇市場</h3>
+                <ul>
+                    <li v-for  ="(item, index) in filter_market" 
+                        :class ="{'now': item.isNow}"
+                        :data-index ="index"
+                        :data-market ="item.market"
+                        @click ="market_switchClass(index)"
+                    >{{item.name}}</li>
+                </ul>
+            </div>
+            <div>
+                <h3>選擇天氣</h3>
+                <ul>
+                    <li v-for  ="(item, index) in filter_weather" 
+                        :class ="{'now': item.isNow}"
+                        :data-index ="index"
+                        :data-weather ="item.weather"
+                        @click ="weather_switchClass(index)"
+                    >{{item.name}}</li>
                 </ul>
             </div>
         </div>
-        <div class="slideshow" id="slideshow">
-            <div class="nullMessage">
-                <img src="img/owl.svg">
-                <h3>很抱歉，目前沒有符合條件的基金</h3>
-                <div>您可重新勾選篩選條件！</div>
-            </div>
-            <div class="subject" id="subject" move_lock="0">
-            </div>
-            <div class="operating" id="operating">
-                <div class="moving_btn" id="moving_btn">
-                    <div>
-                        <button></button>
-                    </div>
-                    <div class="show">
-                        <button></button>
-                    </div>
+        <div class="fund">
+            <div class="titleBar">
+                <h2>基金市場</h2>
+                <div class="sort" @mouseleave="close_sortMenu" :class="{'open': sort.menuIsOpen}">
+                    <div    class ="nowSort" 
+                            v-for ="item in sort.list" 
+                            v-if ="item.isNow == true"
+                            @click ="switch_sortMenu"
+                    >{{item.text}}</div>
+                    <ul>
+                        <li v-for ="(item, index) in sort.list" 
+                            :class ="{'hover': item.isHover}"
+                            @mouseover ="li_isHover(index)"
+                            @mouseleave ="li_isNotHover(index)"
+                            @click ="li_select(index)"
+                        >{{item.text}}</li>
+                    </ul>
                 </div>
-                <ul></ul>
+            </div>
+            <div class="slideshow" id="slideshow">
+                <div class="nullMessage">
+                    <img src="img/owl.svg">
+                    <h3>很抱歉，目前沒有符合條件的基金</h3>
+                    <div>您可重新勾選篩選條件！</div>
+                </div>
+                <div class="subject" id="subject" move_lock="0">
+                </div>
+                <div class="operating" id="operating">
+                    <div class="moving_btn" id="moving_btn">
+                        <div>
+                            <button></button>
+                        </div>
+                        <div class="show">
+                            <button></button>
+                        </div>
+                    </div>
+                    <ul></ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="total" id="total">
-        <div class="title">
-            <span id="object_title">新興主要貨幣債</span>目前共<span id="fund_length">53</span>檔基金
+        <div class="total" id="total">
+            <div class="title">
+                <span id="object_title">新興主要貨幣債</span>目前共<span id="fund_length">53</span>檔基金
+            </div>
+            <div class="comments">資料來源：XXX, 截至： 2020/01/29</div>
         </div>
-        <div class="comments">資料來源：XXX, 截至： 2020/01/29</div>
+        <a href="" class="report" id="report">查看市場報告</a>
+        <img src="img/move_down.svg" class="move_down" id="move_down">
     </div>
-    <a href="" class="report" id="report">查看市場報告</a>
-    <img src="img/move_down.svg" class="move_down" id="move_down">
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="js/jquery-3.5.1.min.js" charset="utf-8"></script>
     <script src="js/index.js"></script>
 </body>

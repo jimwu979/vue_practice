@@ -22,8 +22,8 @@ gulp.task('build_HTML', function (done) {
 });
 
 gulp.task('build_CSS', function (done) {
-    del(['./dist/css/*']);
-    gulp.src('./src/less/*')
+    del(['./dist/css/*.less']);
+    gulp.src('./src/less/*.less')
         .pipe(less())
         .pipe(cssmin())
         .pipe(gulp.dest('./dist/css/'))
@@ -32,8 +32,8 @@ gulp.task('build_CSS', function (done) {
 });
 
 gulp.task('build_JS', function(done){
-    del(['./dist/js/*']);
-    gulp.src('./src/js/*')
+    del(['./dist/js/*.js']);
+    gulp.src('./src/js/*.js')
         .pipe(babel({
             minified: true,
             presets: ['@babel/env']
@@ -64,8 +64,8 @@ gulp.task('browser_sync', function() {
 gulp.task('watch', function(){
     gulp.watch('src/*.html',      gulp.series('build_HTML'));
     gulp.watch('src/include/*',   gulp.series('build_HTML'));
-    gulp.watch('src/less/*',      gulp.series('build_CSS'));
-    gulp.watch('src/js/*',        gulp.series('build_JS'));
+    gulp.watch('src/less/*.less',      gulp.series('build_CSS'));
+    gulp.watch('src/js/*.js',        gulp.series('build_JS'));
     gulp.watch('src/img/*',       gulp.series('build_IMG'));
 });
 

@@ -34,7 +34,7 @@
             }
         }
     </style>
-    <title>Document</title>
+    <title>Vue Practice</title>
     <script>
         let template = [
             {
@@ -832,7 +832,7 @@
                         :data-index ="index"
                         :data-market ="item.market"
                         @click ="market_switchClass(index)"
-                    >{{item.name}}</li>
+                    >{{item.text}}</li>
                 </ul>
             </div>
             <div>
@@ -843,7 +843,7 @@
                         :data-index ="index"
                         :data-weather ="item.weather"
                         @click ="weather_switchClass(index)"
-                    >{{item.name}}</li>
+                    >{{item.text}}</li>
                 </ul>
             </div>
         </div>
@@ -866,20 +866,30 @@
                     </ul>
                 </div>
             </div>
-            <div class="slideshow" id="slideshow">
+            <div class="slideshow">
                 <div class="nullMessage">
                     <img src="img/owl.svg">
                     <h3>很抱歉，目前沒有符合條件的基金</h3>
                     <div>您可重新勾選篩選條件！</div>
                 </div>
-                <div class="subject" id="subject" move_lock="0">
+                <div class="subject">
+                    <div style="opacity: 1;"
+                         v-for= "(item, index) in slideshow.showTargets"
+                         :class= "{'now': item.isSelect}"
+                         @click= "selectTarget(index)"
+                    >
+                        <h3>{{item.title}}</h3>
+                        <img class="weather" :src="'/img/'+ item.weather +'.svg'">
+                        <img class="line_graph" :src="/img/+ item.line_graph">
+                        <div></div>
+                    </div>
                 </div>
-                <div class="operating" id="operating">
-                    <div class="moving_btn" id="moving_btn">
-                        <div>
+                <div class="operating">
+                    <div class="moving_btn">
+                        <div :class="{'show': slideshow.leftButton}">
                             <button></button>
                         </div>
-                        <div class="show">
+                        <div :class="{'show': slideshow.rightButton}">
                             <button></button>
                         </div>
                     </div>
@@ -889,7 +899,7 @@
         </div>
         <div class="total" id="total">
             <div class="title">
-                <span id="object_title">新興主要貨幣債</span>目前共<span id="fund_length">53</span>檔基金
+                <span id="object_title">{{selectResult.name}}</span>目前共<span>{{selectResult.length}}</span>檔基金
             </div>
             <div class="comments">資料來源：XXX, 截至： 2020/01/29</div>
         </div>
@@ -897,7 +907,6 @@
         <img src="img/move_down.svg" class="move_down" id="move_down">
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="js/jquery-3.5.1.min.js" charset="utf-8"></script>
     <script src="js/index.js"></script>
 </body>
 </html>

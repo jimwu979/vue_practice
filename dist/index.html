@@ -881,7 +881,11 @@
                         <h3>{{item.title}}</h3>
                         <img class="weather" :src="'/img/'+ item.weather +'.svg'">
                         <img class="line_graph" :src="/img/+ item.line_graph">
-                        <div></div>
+                        <!-- <div>{{item.performance}}</div> -->
+                        <div :class="{
+                            'higher': item.performance >= 0, 
+                            'lower': item.performance < 0
+                        }">{{item.performance}}%</div>
                     </div>
                 </div>
                 <div class="operating">

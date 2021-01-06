@@ -939,46 +939,46 @@
                 },
             // slideshow
                 reloadTarget: function(){
-                    // this.slideshow.showTargets = [];
-                    let showTargets_filterMarket = [];
-                    let market_length = this.filter_market.length;
-                    let market = [];
-                    for(let i = 0; i < market_length; i++){
-                        if (this.filter_market[i].isNow == true) {
-                            let selectMarket_length = this.filter_market[i].market.length;
-                            for(let n = 0; n < selectMarket_length; n++){
-                                market.push(this.filter_market[i].market[n]);
+                    // filter
+                        let showTargets_filterMarket = [];
+                        let market_length = this.filter_market.length;
+                        let market = [];
+                        for(let i = 0; i < market_length; i++){
+                            if (this.filter_market[i].isNow == true) {
+                                let selectMarket_length = this.filter_market[i].market.length;
+                                for(let n = 0; n < selectMarket_length; n++){
+                                    market.push(this.filter_market[i].market[n]);
+                                }
                             }
                         }
-                    }
-                    let targets_length = this.slideshow.targets.length;
-                    for(let i = 0; i < targets_length; i++){
-                        for(let m = 0; m < market.length; m++){
-                            if (this.slideshow.targets[i].market.indexOf(market[m]) >= 0) {
-                                showTargets_filterMarket.push(this.slideshow.targets[i]);
+                        let targets_length = this.slideshow.targets.length;
+                        for(let i = 0; i < targets_length; i++){
+                            for(let m = 0; m < market.length; m++){
+                                if (this.slideshow.targets[i].market.indexOf(market[m]) >= 0) {
+                                    showTargets_filterMarket.push(this.slideshow.targets[i]);
+                                }
                             }
                         }
-                    }
-                    let target_filterWeather = [];
-                    let weather_length = this.filter_weather.length;
-                    let weather = [];
-                    for(let i = 0; i < weather_length; i++){
-                        if (this.filter_weather[i].isNow == true) {
-                            let selectweather_length = this.filter_weather[i].weather.length;
-                            for(let n = 0; n < selectweather_length; n++){
-                                weather.push(this.filter_weather[i].weather[n]);
+                        let target_filterWeather = [];
+                        let weather_length = this.filter_weather.length;
+                        let weather = [];
+                        for(let i = 0; i < weather_length; i++){
+                            if (this.filter_weather[i].isNow == true) {
+                                let selectweather_length = this.filter_weather[i].weather.length;
+                                for(let n = 0; n < selectweather_length; n++){
+                                    weather.push(this.filter_weather[i].weather[n]);
+                                }
                             }
                         }
-                    }
-                    let targets_filterMarket_length = showTargets_filterMarket.length;
-                    for(let i = 0; i < targets_filterMarket_length; i++){
-                        for(let m = 0; m < weather.length; m++){
-                            if (showTargets_filterMarket[i].weather.indexOf(weather[m]) >= 0) {
-                                target_filterWeather.push(showTargets_filterMarket[i]);
+                        let targets_filterMarket_length = showTargets_filterMarket.length;
+                        for(let i = 0; i < targets_filterMarket_length; i++){
+                            for(let m = 0; m < weather.length; m++){
+                                if (showTargets_filterMarket[i].weather.indexOf(weather[m]) >= 0) {
+                                    target_filterWeather.push(showTargets_filterMarket[i]);
+                                }
                             }
                         }
-                    }
-                    // console.log(target_filterWeather);
+                    // sort
                 },
                 selectTarget: function(index){
                     let targets = this.slideshow.targets;

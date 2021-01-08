@@ -54,9 +54,9 @@
                         width: slideshow.width + 'px',
                         left: slideshow.left + 'px'
                     }">
-                <div style="opacity: 1;"
-                     v-for= "(item, index) in slideshow.showTargets"
-                     :class= "{'now': item.isSelect}"
+                <!-- <div style="opacity: 1;" -->
+                <div v-for= "(item, index) in slideshow.showTargets"
+                     :class= "{'now': item.isSelect, 'reload': slideshow.targetShow}"
                      @click= "selectTarget(index)"
                      ref="targetCard"
                 >

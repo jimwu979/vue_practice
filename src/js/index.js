@@ -33,6 +33,39 @@
                 rightButton: true,
                 sort: '',
                 page_length: 0,
+                targetShow: false,
+                rwd_information: {
+                    slideshow_W: {
+                        computer: 855, 
+                        pad: window.innerWidth, 
+                        phone: window.innerWidth
+                    },
+                    capacity: {
+                        computer: 16, 
+                        pad: 6, 
+                        phone: 4
+                    },
+                    breakpoint: {
+                        computer: 768, 
+                        pad: 501, 
+                        phone: 375
+                    },
+                    FirstTargetMarginLeft: {
+                        computer: 30, 
+                        pad: 15, 
+                        phone: 15
+                    },
+                    targetMargin: {
+                        computer: 8, 
+                        pad: 8, 
+                        phone: 8
+                    },
+                    targetSize: {
+                        computer: 180, 
+                        pad: window.innerWidth - (8 * 2) / 3, 
+                        phone: (window.innerWidth - 8) / 2
+                    }
+                },
                 targets: [
                     {
                         market: 'bond',
@@ -895,7 +928,7 @@
                     if (index == '0') {
                         for(let i = 1; i < market_length; i++){
                             filter_market[i].isNow = false;
-                        }   
+                        }
                         filter_market[index].isNow = true;
                     } else {
                         filter_market[0].isNow = false;
@@ -1001,37 +1034,8 @@
                         this.resetSlideshowStyle();
                 },
                 resetSlideshowStyle: function(){
-                    let rwd_information = [];
-                        rwd_information.slideshow_W = {
-                            computer: 855, 
-                            pad: window.innerWidth, 
-                            phone: window.innerWidth
-                        };
-                        rwd_information.capacity = {
-                            computer: 16, 
-                            pad: 6, 
-                            phone: 4
-                        };
-                        rwd_information.breakpoint = {
-                            computer: 768, 
-                            pad: 501, 
-                            phone: 375
-                        };
-                        rwd_information.FirstTargetMarginLeft = {
-                            computer: 30, 
-                            pad: 15, 
-                            phone: 15
-                        };
-                        rwd_information.targetMargin = {
-                            computer: 8, 
-                            pad: 8, 
-                            phone: 8
-                        };
-                        rwd_information.targetSize = {
-                            computer: 180, 
-                            pad: rwd_information.slideshow_W.pad - (rwd_information.targetMargin.pad * 2) / 3, 
-                            phone: (rwd_information.slideshow_W.phone - rwd_information.targetMargin.phone) / 2
-                        };
+                    this.slideshow.targetShow = false;
+                    let rwd_information = this.slideshow.rwd_information;
                     let showTarget_length = this.slideshow.showTargets.length;
                     let browserSize;
                     if (window.innerWidth >= rwd_information.breakpoint.computer) {
@@ -1052,39 +1056,12 @@
                     this.slideshow.leftButton = false;
                     this.slideshow.rightButton = true;
                     this.slideshow.nowPage = 0;
+                    setTimeout(() => {
+                        this.slideshow.targetShow = true;
+                    }, 0);
                 },
                 moveSlideshow: function(direction, itemIndex){
-                    let rwd_information = [];
-                        rwd_information.slideshow_W = {
-                            computer: 855, 
-                            pad: window.innerWidth, 
-                            phone: window.innerWidth
-                        };
-                        rwd_information.capacity = {
-                            computer: 16, 
-                            pad: 6, 
-                            phone: 4
-                        };
-                        rwd_information.breakpoint = {
-                            computer: 768, 
-                            pad: 501, 
-                            phone: 375
-                        };
-                        rwd_information.FirstTargetMarginLeft = {
-                            computer: 30, 
-                            pad: 15, 
-                            phone: 15
-                        };
-                        rwd_information.targetMargin = {
-                            computer: 8, 
-                            pad: 8, 
-                            phone: 8
-                        };
-                        rwd_information.targetSize = {
-                            computer: 180, 
-                            pad: rwd_information.slideshow_W.pad - (rwd_information.targetMargin.pad * 2) / 3, 
-                            phone: (rwd_information.slideshow_W.phone - rwd_information.targetMargin.phone) / 2
-                        };
+                    let rwd_information = this.slideshow.rwd_information;
                     let browserSize, row_length;
                     if (window.innerWidth >= rwd_information.breakpoint.computer) {
                             browserSize = 'computer';

@@ -32,6 +32,7 @@
                 leftButton: false,
                 rightButton: true,
                 sort: '',
+                page_length: 0,
                 targets: [
                     {
                         market: 'bond',
@@ -996,10 +997,134 @@
                             item.performance = item[sort_month];
                             this.slideshow.showTargets.push(item);
                         }
-                        
+                    // reset slideshow size
+                        this.resetSlideshowStyle();
+                },
+                resetSlideshowStyle: function(){
+                    let rwd_information = [];
+                        rwd_information.slideshow_W = {
+                            computer: 855, 
+                            pad: window.innerWidth, 
+                            phone: window.innerWidth
+                        };
+                        rwd_information.capacity = {
+                            computer: 16, 
+                            pad: 6, 
+                            phone: 4
+                        };
+                        rwd_information.breakpoint = {
+                            computer: 768, 
+                            pad: 501, 
+                            phone: 375
+                        };
+                        rwd_information.FirstTargetMarginLeft = {
+                            computer: 30, 
+                            pad: 15, 
+                            phone: 15
+                        };
+                        rwd_information.targetMargin = {
+                            computer: 8, 
+                            pad: 8, 
+                            phone: 8
+                        };
+                        rwd_information.targetSize = {
+                            computer: 180, 
+                            pad: rwd_information.slideshow_W.pad - (rwd_information.targetMargin.pad * 2) / 3, 
+                            phone: (rwd_information.slideshow_W.phone - rwd_information.targetMargin.phone) / 2
+                        };
+                    let showTarget_length = this.slideshow.showTargets.length;
+                    let browserSize;
+                    if (window.innerWidth >= rwd_information.breakpoint.computer) {
+                        browserSize = 'computer';
+                    } else if (window.innerWidth >= rwd_information.breakpoint.pad) {
+                        browserSize = 'pad';
+                    } else {
+                        browserSize = 'phone';
+                    }
+                    this.slideshow.page_length = Math.ceil(showTarget_length / rwd_information.capacity[browserSize]);
+                    let column_length = (window.innerWidth >= 768) ? 4 : 2;
+                    this.slideshow.width = rwd_information.FirstTargetMarginLeft[browserSize]
+                                            + (Math.ceil(showTarget_length / column_length)
+                                                * rwd_information.targetSize[browserSize])
+                                            + ((Math.ceil(showTarget_length / column_length) - 1) 
+                                                * rwd_information.targetMargin[browserSize]);
+                    this.slideshow.left = 0;
+                    this.slideshow.leftButton = false;
+                    this.slideshow.rightButton = true;
+                    this.slideshow.nowPage = 0;
+                },
+                moveSlideshow: function(direction, itemIndex){
+                    let rwd_information = [];
+                        rwd_information.slideshow_W = {
+                            computer: 855, 
+                            pad: window.innerWidth, 
+                            phone: window.innerWidth
+                        };
+                        rwd_information.capacity = {
+                            computer: 16, 
+                            pad: 6, 
+                            phone: 4
+                        };
+                        rwd_information.breakpoint = {
+                            computer: 768, 
+                            pad: 501, 
+                            phone: 375
+                        };
+                        rwd_information.FirstTargetMarginLeft = {
+                            computer: 30, 
+                            pad: 15, 
+                            phone: 15
+                        };
+                        rwd_information.targetMargin = {
+                            computer: 8, 
+                            pad: 8, 
+                            phone: 8
+                        };
+                        rwd_information.targetSize = {
+                            computer: 180, 
+                            pad: rwd_information.slideshow_W.pad - (rwd_information.targetMargin.pad * 2) / 3, 
+                            phone: (rwd_information.slideshow_W.phone - rwd_information.targetMargin.phone) / 2
+                        };
+                    let browserSize, row_length;
+                    if (window.innerWidth >= rwd_information.breakpoint.computer) {
+                            browserSize = 'computer';
+                            row_length = 4;
+                        } else if (window.innerWidth >= rwd_information.breakpoint.pad) {
+                            browserSize = 'pad';
+                            row_length = 3;
+                        } else {
+                            browserSize = 'phone';
+                            row_length = 2;
+                    }
+                    let newPage = itemIndex == undefined ? this.slideshow.nowPage = this.slideshow.nowPage + direction : itemIndex;
+                    if (newPage <= 0) {
+                        newPage = 0;
+                        this.slideshow.leftButton = false;
+                        this.slideshow.rightButton = true;
+                    } else if (newPage >= this.slideshow.page_length - 1){
+                        newPage = this.slideshow.page_length - 1;
+                        this.slideshow.leftButton = true;
+                        this.slideshow.rightButton = false;
+                    } else {
+                        this.slideshow.leftButton = true;
+                        this.slideshow.rightButton = true;
+                    }
+                    this.slideshow.nowPage = newPage;
+                    let move_W = (
+                                    rwd_information.targetSize[browserSize]
+                                    * 
+                                    Math.ceil(rwd_information.capacity[browserSize] / row_length)
+                                 ) + (
+                                    (rwd_information.targetMargin[browserSize])
+                                    * 
+                                    (Math.ceil(rwd_information.capacity[browserSize] / row_length) - 1)
+                                 );
+                    let firstPage_paddingLeft = newPage == 0 ? 30 : 0;
+                    this.slideshow.left = firstPage_paddingLeft + (move_W * -1 * newPage);
+                    
                 },
                 selectTarget: function(index){
-                    let targets = this.slideshow.targets;
+                    let targets = this.slideshow.showTargets;
                     let targets_length = targets.length;
                     for(let i = 0; i < targets_length; i++){
                         targets[i].isSelect = false;
@@ -1011,12 +1136,13 @@
         },
         created: function(){
             this.reloadTarget();
+            window.addEventListener('resize', this.resetSlideshowStyle);
             this.selectResult.name = this.slideshow.targets[0].title;
             this.selectResult.length = this.slideshow.targets[0].fund_length;
         },
         computed: {
-            aa: function(){
-                // return item.performance;
+            page_length: function(){
+                return Math.ceil(this.slideshow.showTargets.length / 16);
             }
         }
     });

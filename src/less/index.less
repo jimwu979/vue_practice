@@ -920,173 +920,174 @@ body{
         }
     }
 }
-@media (max-width: 374px){
-    body{
-        #app{
-            h1{
-                &:before{
-                }
-            }
-            .filter{
-                >div{
-                    ~div{
-                    }
-                    h3{
-                    }
-                    ul{
-                        li{
-                            padding: 0px 6px;
-                            &[data-weather]{
-                                ~li{
-                                    padding-left: 20px;
-                                    &:before, &:after{
-                                        top: 3px;
-                                        left: 2px;
-                                        width: 16px;
-                                        height: 16px;
-                                    }
-                                    &:before{
-                                    }
-                                    &:after{
-                                    }
-                                    &[data-weather="optimism"]{
-                                        &:before{
-                                        }
-                                        &:after{
-                                        }
-                                    }
-                                    &[data-weather="neutral"]{
-                                        &:before{
-                                        }
-                                        &:after{
-                                        }
-                                    }
-                                    &[data-weather="pessimistic"]{
-                                        &:before{
-                                        }
-                                        &:after{
-                                        }
-                                    }
-                                }
-                            }
-                            &.now{
-                                &[data-weather]{
-                                    &:before{
-                                    }
-                                    &:after{
-                                    }
-                                }
-                            }
-                            &:nth-of-type(1){
-                                margin-right: 11px;
-                                &:after{
-                                    right: -7px;
-                                    height: 24px;
-                                }
-                                &.now{
-                                    &:after{
-                                    }
-                                }
-                            }
-                            &:nth-last-of-type(1){
-                            }
-                        }
-                    }
-                }
-            }
-            .fund{
-                .titleBar{
-                    h2{
-                    }
-                    .sort{
-                        .nowSort{
-                            &:before, &:after{
-                            }
-                            &:before{
-                            }
-                            &:after{
-                            }
-                        }
-                        ul{
-                            li{
-                                &.hover{
-                                }
-                            }
-                        }
-                    }
-                }
-                .slideshow{
-                    &::-webkit-scrollbar{
-                    }
-                    .subject{
-                        >div{
-                            width: calc(~'(100vw - 10px - 8px) / 2');
-                            &.now{
-                            }
-                            ~div{
-                            }
-                            &:nth-of-type(-n+4){
-                            }
-                            &:nth-of-type(-n+2){
-                            }
-                            &:nth-of-type(2n+1){
-                            }
-                            &:nth-of-type(4n+1){
-                            }
-                            &:nth-of-type(2){
-                                ~div{
-                                }
-                            }
-                            >*{
-                            }
-                            h3{
-                            }
-                            .weather{
-                            }
-                            .line_graph{
-                            }
-                            div{
-                                &.higher{
-                                    
-                                }
-                                &.lower{
-                                    
-                                }
-                            }
-                        }
-                    }
-                    .operating{
-                        .moving_btn{
-                            div{
-                                &:nth-of-type(1){
-                                }
-                                button{
-                                }
-                                &.show{
-                                }
-                            }
-                        }
-                        ul{
-                            li{
-                                ~li{
-                                }
-                                &.now{
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            .total{
-                .title{
-                    span{
-                    }
-                }
-                .comments{
-                }
-            }
-            .report{
-            }
-        }
-    }
-}
+// RWD max-width: 374px
+    // @media (max-width: 374px){
+    //     body{
+    //         #app{
+    //             h1{
+    //                 &:before{
+    //                 }
+    //             }
+    //             .filter{
+    //                 >div{
+    //                     ~div{
+    //                     }
+    //                     h3{
+    //                     }
+    //                     ul{
+    //                         li{
+    //                             padding: 0px 6px;
+    //                             &[data-weather]{
+    //                                 ~li{
+    //                                     padding-left: 20px;
+    //                                     &:before, &:after{
+    //                                         top: 3px;
+    //                                         left: 2px;
+    //                                         width: 16px;
+    //                                         height: 16px;
+    //                                     }
+    //                                     &:before{
+    //                                     }
+    //                                     &:after{
+    //                                     }
+    //                                     &[data-weather="optimism"]{
+    //                                         &:before{
+    //                                         }
+    //                                         &:after{
+    //                                         }
+    //                                     }
+    //                                     &[data-weather="neutral"]{
+    //                                         &:before{
+    //                                         }
+    //                                         &:after{
+    //                                         }
+    //                                     }
+    //                                     &[data-weather="pessimistic"]{
+    //                                         &:before{
+    //                                         }
+    //                                         &:after{
+    //                                         }
+    //                                     }
+    //                                 }
+    //                             }
+    //                             &.now{
+    //                                 &[data-weather]{
+    //                                     &:before{
+    //                                     }
+    //                                     &:after{
+    //                                     }
+    //                                 }
+    //                             }
+    //                             &:nth-of-type(1){
+    //                                 margin-right: 11px;
+    //                                 &:after{
+    //                                     right: -7px;
+    //                                     height: 24px;
+    //                                 }
+    //                                 &.now{
+    //                                     &:after{
+    //                                     }
+    //                                 }
+    //                             }
+    //                             &:nth-last-of-type(1){
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //             .fund{
+    //                 .titleBar{
+    //                     h2{
+    //                     }
+    //                     .sort{
+    //                         .nowSort{
+    //                             &:before, &:after{
+    //                             }
+    //                             &:before{
+    //                             }
+    //                             &:after{
+    //                             }
+    //                         }
+    //                         ul{
+    //                             li{
+    //                                 &.hover{
+    //                                 }
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //                 .slideshow{
+    //                     &::-webkit-scrollbar{
+    //                     }
+    //                     .subject{
+    //                         >div{
+    //                             width: calc(~'(100vw - 10px - 8px) / 2');
+    //                             &.now{
+    //                             }
+    //                             ~div{
+    //                             }
+    //                             &:nth-of-type(-n+4){
+    //                             }
+    //                             &:nth-of-type(-n+2){
+    //                             }
+    //                             &:nth-of-type(2n+1){
+    //                             }
+    //                             &:nth-of-type(4n+1){
+    //                             }
+    //                             &:nth-of-type(2){
+    //                                 ~div{
+    //                                 }
+    //                             }
+    //                             >*{
+    //                             }
+    //                             h3{
+    //                             }
+    //                             .weather{
+    //                             }
+    //                             .line_graph{
+    //                             }
+    //                             div{
+    //                                 &.higher{
+                                        
+    //                                 }
+    //                                 &.lower{
+                                        
+    //                                 }
+    //                             }
+    //                         }
+    //                     }
+    //                     .operating{
+    //                         .moving_btn{
+    //                             div{
+    //                                 &:nth-of-type(1){
+    //                                 }
+    //                                 button{
+    //                                 }
+    //                                 &.show{
+    //                                 }
+    //                             }
+    //                         }
+    //                         ul{
+    //                             li{
+    //                                 ~li{
+    //                                 }
+    //                                 &.now{
+    //                                 }
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //             .total{
+    //                 .title{
+    //                     span{
+    //                     }
+    //                 }
+    //                 .comments{
+    //                 }
+    //             }
+    //             .report{
+    //             }
+    //         }
+    //     }
+    // }

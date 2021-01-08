@@ -872,16 +872,20 @@
                     <h3>很抱歉，目前沒有符合條件的基金</h3>
                     <div>您可重新勾選篩選條件！</div>
                 </div>
-                <div class="subject">
+                <div class="subject" 
+                        v-bind:style="{
+                            width: slideshow.width + 'px',
+                            left: slideshow.left + 'px'
+                        }">
                     <div style="opacity: 1;"
                          v-for= "(item, index) in slideshow.showTargets"
                          :class= "{'now': item.isSelect}"
                          @click= "selectTarget(index)"
+                         ref="targetCard"
                     >
                         <h3>{{item.title}}</h3>
                         <img class="weather" :src="'/img/'+ item.weather +'.svg'">
                         <img class="line_graph" :src="/img/+ item.line_graph">
-                        <!-- <div>{{item.performance}}</div> -->
                         <div :class="{
                             'higher': item.performance >= 0, 
                             'lower': item.performance < 0
@@ -891,13 +895,17 @@
                 <div class="operating">
                     <div class="moving_btn">
                         <div :class="{'show': slideshow.leftButton}">
-                            <button></button>
+                            <button @click="moveSlideshow(-1)"></button>
                         </div>
                         <div :class="{'show': slideshow.rightButton}">
-                            <button></button>
+                            <button @click="moveSlideshow(1)"></button>
                         </div>
                     </div>
-                    <ul></ul>
+                    <ul>
+                        <li v-for="(item, index) in slideshow.page_length" 
+                            :class="{'now': index == slideshow.nowPage}"
+                            @click="moveSlideshow(0, index)"></li>
+                    </ul>
                 </div>
             </div>
         </div>
